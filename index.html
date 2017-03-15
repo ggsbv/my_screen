@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="style.css">
+    <title>What to eat</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <main>
+        <div id="userInputSection">
+          <div id="userInputBox">
+            <div class="currentUserInput hidden">
+              <h1><button id="h1button" class="mouseover" type="button">What do you want to eat?</button></h1>
+            </div>
+            <div class="currentUserInput hidden">
+              <button class="mouseover" type="button" name="breakfastButton">Breakfast</button>
+              <p>or</p>
+              <button class="mouseover" type="button" name="lunchButton">Lunch/Dinner</button>
+            </div>
+            <div class="currentUserInput hidden">
+              <h2>How hungry are you on a scale of 1 to 5?<h2>
+                <input class="radioButton" type="radio" name="radio1" value="1">1</input>
+                <input class="radioButton" type="radio" name="radio2" value="2">2</input>
+                <input class="radioButton" type="radio" name="radio3" value="3">3</input>
+                <input class="radioButton" type="radio" name="radio4" value="4">4</input>
+                <input class="radioButton" type="radio" name="radio5" value="5">5</input>
+                <button id="nextButton" type="button" name="nextButton">Next</button>
+            </div>
+            <div class="currentUserInput hidden">
+              <button class="mouseover" type="button" name="salt">Salt</button>
+              <p>or</p>
+              <button class="mouseover" type="button" name="sweet">Sweet</button>
+            </div>
+            <div class="currentUserInput hidden">
+              <h2>You're done!</h2>
+            </div>
+          </div>
+        </div>
+        <div id="resultDiv">
+
+        </div>
+      </main>
+    </div>
+
+    <script type="text/javascript" src="handlebars-v4.0.5.js">
+
+    </script>
+    <script id="userOutputTemplate" type="text/x-handlebars">
+      <div id="userResultOutput">
+        {{#results}}
+        <p class="resultP">You should have:</p>
+        <img src = {{resultImage}} id="resultImage">
+        <p class="resultP">{{resultText}}</p>
+        {{/results}}
+      </div>
+    </script>
+    <script src="my_screen.js">
+
+    </script>
+  </body>
+</html>
