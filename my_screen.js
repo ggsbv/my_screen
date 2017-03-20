@@ -25,7 +25,12 @@ function getRadioValue(radioButtonList){
   }
   return false;
 }
-
+//function getInput accepts two arguments:
+//1) eventTarget, which is the event.target
+//2) currentStep, which is the current index of the currentUserInput,
+//and therefore the current display that the user is interacting with.
+//getInput handles retrieving the user input for each user choice, and
+//returns a string which is the user's choice.
 function getInput(eventTarget, currentStep){
   var input = "";
   if(eventTarget.type === 'button'){
@@ -47,7 +52,9 @@ function getInput(eventTarget, currentStep){
   };
   return input;
 };
-
+//function whichMeal accepts one argument.
+//1) userChoiceList is a list which contains all the user's choices.
+//whichMeal returns the data object that should be used to determine results
 function whichMeal(userChoiceList){
   var mealtime = userChoiceList[0].toLowerCase('');
 
@@ -57,15 +64,21 @@ function whichMeal(userChoiceList){
     return lunchData;
   }
 };
-
+//function analyseChoices accepts two arguments.
+//1) listOfData => data object that should be used to calculate the result
+//2) userChoiceList => an array containing the user's choices
+//analyseChoices returns a string that contains the meal which the user should
+//eat.
 function analyseChoices(listOfData, userChoiceList){
   var preference = userChoiceList[2].toLowerCase('');
-  console.log(preference);
   var hungerRating = userChoiceList[1].toLowerCase('');
   var selectedPreferenceObj = listOfData[preference];
   return selectedPreferenceObj[hungerRating];
 };
-
+//function resultImage accepts one argument.
+//1) result => a string which is the name of a meal
+//resultImage returns the string name of an image that should be associated
+//with the meal string that was provided as an argument
 function resultImage(result){
   switch (result) {
     case 'Crackers':
@@ -104,13 +117,24 @@ function resultImage(result){
     case 'Honey BBQ Burger':
       return 'honey_bbq_burger.jpg'
       break;
-  }
-}
+  };
+};
 
+// function displayResults(outputTemplate, outputElement, resultString, image){
+//   var source = document.querySelector(outputTemplate).innerHTML;
+//   template = Handlebars.compile(source);
+//   var data = {results:
+//     {resultText : resultString + "!", resultImage : image}
+//   };
+//   var resultDiv = document.querySelector(outputElement);
+//   resultDiv.innerHTML = template(data);
+//   resultDiv.scrollIntoView();
+// }
+// //user starts by viewing element 0 of class .currentUserInput
 var currentStep = 0;
-
+//display the current element
 currentUserInput[currentStep].classList.toggle('hidden');
-
+//initialise array that will store user choices
 var choices = [];
 
 userInputBox.addEventListener('click', function(event){
@@ -120,7 +144,6 @@ userInputBox.addEventListener('click', function(event){
       input = getInput(event.target, currentStep);
       choices.push(input);
     }
-    console.log(input);
     if (currentStep < currentUserInput.length - 1){
       currentUserInput[currentStep].classList.toggle('hidden');
       currentStep++;
@@ -130,6 +153,7 @@ userInputBox.addEventListener('click', function(event){
       var mealData = whichMeal(choices);
       var result = analyseChoices(mealData, choices);
       var resultImg = resultImage(result);
+
       var source = document.querySelector('#userOutputTemplate').innerHTML;
       template = Handlebars.compile(source);
       var data = {results:
